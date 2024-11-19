@@ -5,7 +5,9 @@
 $mk-body-color: #3d3d3d
 $mk-body-bg-color: #ededed
 $mk-logo-color-light: #000
+$mk-color-scheme-light: #000
 $mk-logo-color-dark: #fff
+$mk-color-scheme-dark: #fff
 
 // Google Fonts
 
@@ -36,12 +38,38 @@ $mk-logo-color-dark: #fff
 
 // Mixins
 
-@mixin transform($ms, $type: ease)
+@mixin transition($ms, $type: ease)
   transition: all $ms $type
   -moz-transition: all $ms $type
   -webkit-transition: $ms $type
   -ms-transition: all $ms $type
   -o-transition: all $ms $type
+
+@mixin reset-list
+  margin: 0
+  padding: 0
+  list-style: none
+
+@mixin box-shadow
+  box-shadow: 0px 3px 10px 4px rgba(0,0,0,0.15)
+
+@mixin fontello($font-size, $line-height, $margin: 0 .2em )
+  font-family: "fontello"
+  font-style: normal
+  font-weight: normal
+  font-size: $font-size
+  color: inherit
+  speak: never
+  display: inline-block
+  text-decoration: inherit
+  width: 1em
+  margin: $margin
+  text-align: center
+  font-variant: none
+  text-transform: none
+  line-height: $line-height
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
 // Base
 
@@ -94,12 +122,12 @@ a
   justify-content: flex-end
   width: 100%
   z-index: 999
-  @include transform(500ms)
+  @include transition(500ms)
 
   .container
     position: relative
     padding: 0.5rem 0
-    @include transform(500ms)
+    @include transition(500ms)
 
   &.sticky
     position: fixed
@@ -128,48 +156,81 @@ a
 .top-menu
   margin: 0
 
+  a
+    vertical-align: middle
+    color: inherit
+
   & > li
+    position: relative
     margin-right: 2rem
+    line-height: 2.5rem
 
-    a
-      vertical-align: middle
-      color: inherit
+  & > li.menu-item-has-children > a
+    padding-right: 20px
 
+  & > li.menu-item-has-children
+
+    & > a::before
+      @include fontello(1.2em, 2em, 0)
+      @include transition(500ms)
+      content: '\e800'
+      position: absolute
+      right: -5px
+      top: -1px
+
+    &:hover > a::before
+      transform: rotate(180deg)
+
+  & > li.menu-item-has-children > ul
+    left: 30px
+    top: 45px
+    opacity: 0
+    visibility: hidden
+    @include transition(750ms)
+   
+
+  & > li.menu-item-has-children:hover > ul
+    visibility: visible
+    opacity: 1
+    transform: translate(-40px, 0px)
   // Submenues
 
-  & > li > ul
+  .sub-menu
     position: absolute
-    left: 0
-    top: 40px
-    min-width: 400px
-    z-index: 100
-    opacity: 0
-    list-style: none
-    visibility: hidden
     display: block
+    z-index: 100
+    min-width: 300px
+    list-style: none
+    background-color: $mk-color-scheme-dark
+    border-radius: 0.5em
+    overflow: hidden
+    @include reset-list
+    @include box-shadow
+
+    & > li
+      padding: .75rem 0
+      border-bottom: 1px solid #d9d9d9
+      padding-left: 2rem
+      @include transition(500ms)
+
+      &:last-child
+        border-bottom: none
+
+      &:hover
+        background-color: #f1f1f1
+        padding-left: 1.5rem
+
+
 
 .social
   display: flex
   align-items: center
 
-.social-icon i
-  font-family: "fontello"
-  font-style: normal
-  font-weight: normal
-  font-size: 1.2em
-  color: inherit
-  speak: never
-  display: inline-block
-  text-decoration: inherit
-  width: 1em
-  margin-right: .2em
-  text-align: center
-  font-variant: none
-  text-transform: none
-  line-height: 2em
-  margin-left: .2em
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
+.social-icon
+
+  i
+    @include fontello(1.2em, 2em)
+
 
 .icon-medium:before
   content: '\f23a'
@@ -232,16 +293,27 @@ a
   .sticky-top.sticky #logo
 
     path
-      fill: $mk-logo-color-dark
+      fill: $mk-color-scheme-dark
 
   .sticky-top.sticky
-    background-color: $mk-logo-color-light
+    background-color: $mk-color-scheme-light
 
     .top-menu, .social-icon i, .mobile-nav-toggler
-      color: $mk-logo-color-dark
+      color: $mk-color-scheme-dark
 
     .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after
-      background-color: $mk-logo-color-dark !important
+      background-color: $mk-color-scheme-dark !important
+
+  .sticky-top.sticky .top-menu
+
+    .sub-menu
+      background-color: #303030
+
+      & > li
+        border-bottom: 1px solid #909090
+
+        &:hover
+          background-color: #606060
 
 
 
