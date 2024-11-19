@@ -4,6 +4,8 @@
 
 $mk-body-color: #3d3d3d
 $mk-body-bg-color: #ededed
+$mk-logo-color-light: #000
+$mk-logo-color-dark: #fff
 
 // Google Fonts
 
@@ -32,6 +34,15 @@ $mk-body-bg-color: #ededed
   font-weight: normal
   font-style: normal
 
+// Mixins
+
+@mixin transform($ms, $type: ease)
+  transition: all $ms $type
+  -moz-transition: all $ms $type
+  -webkit-transition: $ms $type
+  -ms-transition: all $ms $type
+  -o-transition: all $ms $type
+
 // Base
 
 :root
@@ -58,42 +69,179 @@ a
 // Sticky Header
 
 #logo
-  height: 2em
+  position: absolute
+  display: inline
+  top: -2px
+  left: 7px
+  height: 100%
+  flex-grow: 1
+
+  path
+    fill: $mk-logo-color-light
 
 @media (min-width: 992px)
   #logo
-    height: 4em
+    height: 100%
+
+  .sticky-top #logo
+    left: 7px
 
 .sticky-top
-  position: static
+  position: absolute
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: flex-end
+  width: 100%
+  z-index: 999
+  @include transform(500ms)
 
-.social-icon
+  .container
+    position: relative
+    padding: 0.5rem 0
+    @include transform(500ms)
 
-  i
-    font-family: "fontello"
-    font-style: normal
-    font-weight: normal
-    font-size: 1.5em
-    speak: never
-    display: inline-block
-    text-decoration: inherit
-    width: 1em
-    margin-right: .2em
-    text-align: center
-    font-variant: none
-    text-transform: none
-    line-height: 2em
-    margin-left: .2em
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
+  &.sticky
+    position: fixed
+    top: -70px
+    left: 0
+    background-color: $mk-logo-color-dark
 
-  .icon-medium:before
-    content: '\f23a'
-  .icon-twitter:before
-    content: '\f309'
-  .icon-linkedin-circled:before
-    content: '\f319'
-  .icon-behance:before
-    content: '\f34e'
+    .container
+      padding: 0.5rem 0
+
+  &.sticky.show
+    top: 0px
+
+@media (min-width: 992px)
+  .sticky-top .container
+    padding: 2.5rem 0
+
+.navigation
+  display: none
+  visibility: hidden
+  align-items: center
+
+  ul
+    margin: 0
+  
+.top-menu
+  margin: 0
+
+  & > li
+    margin-right: 2rem
+
+    a
+      vertical-align: middle
+      color: inherit
+
+  // Submenues
+
+  & > li > ul
+    position: absolute
+    left: 0
+    top: 40px
+    min-width: 400px
+    z-index: 100
+    opacity: 0
+    list-style: none
+    visibility: hidden
+    display: block
+
+.social
+  display: flex
+  align-items: center
+
+.social-icon i
+  font-family: "fontello"
+  font-style: normal
+  font-weight: normal
+  font-size: 1.2em
+  color: inherit
+  speak: never
+  display: inline-block
+  text-decoration: inherit
+  width: 1em
+  margin-right: .2em
+  text-align: center
+  font-variant: none
+  text-transform: none
+  line-height: 2em
+  margin-left: .2em
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+.icon-medium:before
+  content: '\f23a'
+.icon-twitter:before
+  content: '\f309'
+.icon-linkedin-circled:before
+  content: '\f319'
+.icon-behance:before
+  content: '\f34e'
+
+.mobile-nav-toggler
+  display: inline-block
+  visibility: visible
+  background-color: unset
+  padding: 0
+  margin: 4px 0.5rem 0 0
+  border: none
+  z-index: 999999
+
+  .hamburger-label
+    position: relative
+    top: -6px
+    left: 0
+    color: $mk-body-color
+    text-transform: uppercase
+    font-weight: 500
+    font-size: 1rem
+    padding: 0 0.5rem
+    color: inherit
+
+.mobile-menu
+  position: fixed
+  right: 0
+  top: 0
+  width: 100%
+  height: 100%
+  min-width: 375px
+  opacity: 0
+  visibility: hidden
+  z-index: 99999
+
+.mobile-menu-visible
+  overflow: hidden
+
+.mobile-menu-visible .mobile-menu
+  opacity: 1
+  visibility: visible
+
+@media (min-width: 992px)
+  .mobile-nav-toggler
+    opacity: 0
+    visibility: hidden
+    display: none
+
+  .navigation
+    display: flex
+    visibility: visible
+
+@media (prefers-color-scheme: dark)
+  .sticky-top.sticky #logo
+
+    path
+      fill: $mk-logo-color-dark
+
+  .sticky-top.sticky
+    background-color: $mk-logo-color-light
+
+    .top-menu, .social-icon i, .mobile-nav-toggler
+      color: $mk-logo-color-dark
+
+    .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after
+      background-color: $mk-logo-color-dark !important
+
 
 

@@ -49,23 +49,108 @@ a:hover {
 }
 
 #logo {
-  height: 2em;
+  position: absolute;
+  display: inline;
+  top: -2px;
+  left: 7px;
+  height: 100%;
+  flex-grow: 1;
+}
+#logo path {
+  fill: #000;
 }
 
 @media (min-width: 992px) {
   #logo {
-    height: 4em;
+    height: 100%;
+  }
+  .sticky-top #logo {
+    left: 7px;
   }
 }
 .sticky-top {
-  position: static;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  z-index: 999;
+  transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+}
+.sticky-top .container {
+  position: relative;
+  padding: 0.5rem 0;
+  transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+}
+.sticky-top.sticky {
+  position: fixed;
+  top: -70px;
+  left: 0;
+  background-color: #fff;
+}
+.sticky-top.sticky .container {
+  padding: 0.5rem 0;
+}
+.sticky-top.sticky.show {
+  top: 0px;
+}
+
+@media (min-width: 992px) {
+  .sticky-top .container {
+    padding: 2.5rem 0;
+  }
+}
+.navigation {
+  display: none;
+  visibility: hidden;
+  align-items: center;
+}
+.navigation ul {
+  margin: 0;
+}
+
+.top-menu {
+  margin: 0;
+}
+.top-menu > li {
+  margin-right: 2rem;
+}
+.top-menu > li a {
+  vertical-align: middle;
+  color: inherit;
+}
+.top-menu > li > ul {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  min-width: 400px;
+  z-index: 100;
+  opacity: 0;
+  list-style: none;
+  visibility: hidden;
+  display: block;
+}
+
+.social {
+  display: flex;
+  align-items: center;
 }
 
 .social-icon i {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  color: inherit;
   speak: never;
   display: inline-block;
   text-decoration: inherit;
@@ -79,17 +164,89 @@ a:hover {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.social-icon .icon-medium:before {
+
+.icon-medium:before {
   content: "\f23a";
 }
-.social-icon .icon-twitter:before {
+
+.icon-twitter:before {
   content: "\f309";
 }
-.social-icon .icon-linkedin-circled:before {
+
+.icon-linkedin-circled:before {
   content: "\f319";
 }
-.social-icon .icon-behance:before {
+
+.icon-behance:before {
   content: "\f34e";
+}
+
+.mobile-nav-toggler {
+  display: inline-block;
+  visibility: visible;
+  background-color: unset;
+  padding: 0;
+  margin: 4px 0.5rem 0 0;
+  border: none;
+  z-index: 999999;
+}
+.mobile-nav-toggler .hamburger-label {
+  position: relative;
+  top: -6px;
+  left: 0;
+  color: #3d3d3d;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  color: inherit;
+}
+
+.mobile-menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 375px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 99999;
+}
+
+.mobile-menu-visible {
+  overflow: hidden;
+}
+
+.mobile-menu-visible .mobile-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 992px) {
+  .mobile-nav-toggler {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+  .navigation {
+    display: flex;
+    visibility: visible;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .sticky-top.sticky #logo path {
+    fill: #fff;
+  }
+  .sticky-top.sticky {
+    background-color: #000;
+  }
+  .sticky-top.sticky .top-menu, .sticky-top.sticky .social-icon i, .sticky-top.sticky .mobile-nav-toggler {
+    color: #fff;
+  }
+  .sticky-top.sticky .hamburger-inner, .sticky-top.sticky .hamburger-inner::before, .sticky-top.sticky .hamburger-inner::after {
+    background-color: #fff !important;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
