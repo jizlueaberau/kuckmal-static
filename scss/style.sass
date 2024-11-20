@@ -3,11 +3,15 @@
 // Colors
 
 $mk-body-color: #3d3d3d
+$mk-body-color-dark: #f9f9f9
 $mk-body-bg-color: #ededed
+$mk-body-bg-color-dark: #0d0d0d
 $mk-logo-color-light: #000
-$mk-color-scheme-light: #000
 $mk-logo-color-dark: #fff
+$mk-color-scheme-light: #000
 $mk-color-scheme-dark: #fff
+$mk-sticky-top-bg-color-light: #fff
+$mk-sticky-top-bg-color-dark: #0d0d0d
 
 // Google Fonts
 
@@ -45,6 +49,13 @@ $mk-color-scheme-dark: #fff
   -ms-transition: all $ms $type
   -o-transition: all $ms $type
 
+@mixin translateX($val)
+  transform: translateX($val)
+  -moz-transform: translateX($val)
+  -webkit-transform: translateX($val)
+  -ms-transform: translateX($val)
+  -o-transform: translateX($val)
+
 @mixin reset-list
   margin: 0
   padding: 0
@@ -53,7 +64,7 @@ $mk-color-scheme-dark: #fff
 @mixin box-shadow
   box-shadow: 0px 3px 10px 4px rgba(0,0,0,0.15)
 
-@mixin fontello($font-size, $line-height, $margin: 0 .2em )
+@mixin fontello($font-size, $line-height, $margin: 0 .4em )
   font-family: "fontello"
   font-style: normal
   font-weight: normal
@@ -133,7 +144,7 @@ a
     position: fixed
     top: -70px
     left: 0
-    background-color: $mk-logo-color-dark
+    background-color: $mk-sticky-top-bg-color-light
 
     .container
       padding: 0.5rem 0
@@ -152,6 +163,8 @@ a
 
   ul
     margin: 0
+
+// Top Menu
   
 .top-menu
   margin: 0
@@ -175,6 +188,7 @@ a
       @include transition(500ms)
       content: '\e800'
       position: absolute
+      display: none
       right: -5px
       top: -1px
 
@@ -187,12 +201,15 @@ a
     opacity: 0
     visibility: hidden
     @include transition(750ms)
-   
 
   & > li.menu-item-has-children:hover > ul
     visibility: visible
     opacity: 1
     transform: translate(-40px, 0px)
+
+  & > li.menu-item-has-children .dropdown-btn
+    display: none
+      
   // Submenues
 
   .sub-menu
@@ -220,17 +237,17 @@ a
         background-color: #f1f1f1
         padding-left: 1.5rem
 
-
+// Social Icons
 
 .social
   display: flex
   align-items: center
 
 .social-icon
+  z-index: 999999
 
   i
     @include fontello(1.2em, 2em)
-
 
 .icon-medium:before
   content: '\f23a'
@@ -240,6 +257,10 @@ a
   content: '\f319'
 .icon-behance:before
   content: '\f34e'
+.icon-down-open-mini
+  content: '\e800'
+
+// Hamburger
 
 .mobile-nav-toggler
   display: inline-block
@@ -261,6 +282,8 @@ a
     padding: 0 0.5rem
     color: inherit
 
+// Mobile Menu
+
 .mobile-menu
   position: fixed
   right: 0
@@ -272,8 +295,96 @@ a
   visibility: hidden
   z-index: 99999
 
+  &::before
+    position: absolute
+    content: " "
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+    visibility: hidden
+    background-color: rgba(0,0,0,0.7)
+    @include transition(500ms)
+
+  .menu-box
+    position: absolute
+    right: 0px
+    top: 0px
+    width: 80vw
+    height: 100%
+    background: $mk-color-scheme-dark
+    padding: 0
+    z-index: 5
+    opacity: 0
+    visibility: hidden
+    border-radius: 0
+    @include translateX(101%)
+
+    .top-menu
+      list-style: none
+      padding: 4em 0 0 0
+      margin: 0
+
+      & > li
+        margin-right: 0
+        padding: 0 0 0 2em
+        border-bottom: 1px solid #d9d9d9
+
+      .dropdown-btn
+        position: absolute
+        display: block
+        right: 8px
+        top: 8px
+
+        &::before
+          content: '\e800'
+          @include fontello(2em, 2em, 0)
+          display: block
+          line-height: 30px
+
+        &.open
+          transform: rotate(180deg)
+
+      & > li.menu-item-has-children
+
+        &.open
+          background-color: #f1f1f1
+
+        &:hover > ul
+          transform: none
+
+      & > li.menu-item-has-children > ul
+        opacity: 1
+        visibility: visible
+
+        & > li
+          border-bottom: 0 none
+          padding: 0.25rem 1.5rem
+
+      .sub-menu
+        position: relative
+        top: 0
+        left: 0
+        min-width: auto
+        background-color: transparent
+        border-radius: 0
+        overflow: auto
+        display: none
+        box-shadow: none !important
+
 .mobile-menu-visible
   overflow: hidden
+
+  .mobile-menu::before
+    opacity: 1
+    visibility: visible
+
+  .mobile-menu .menu-box
+    opacity: 1
+    visibility: visible
+    @include transition(500ms)
+    @include translateX(0%)
 
 .mobile-menu-visible .mobile-menu
   opacity: 1
@@ -289,31 +400,44 @@ a
     display: flex
     visibility: visible
 
+  .top-menu > li.menu-item-has-children > a::before
+    display: block
+
+  .mobile-menu
+    display: none
+
+  .mobile-menu-visible
+    overflow: auto
+
 @media (prefers-color-scheme: dark)
-  .sticky-top.sticky #logo
+  body
+    color: $mk-body-color-dark
+    background-color: $mk-body-bg-color-dark
+
+  #logo
 
     path
       fill: $mk-color-scheme-dark
 
   .sticky-top.sticky
-    background-color: $mk-color-scheme-light
+    background-color: $mk-sticky-top-bg-color-dark
 
-    .top-menu, .social-icon i, .mobile-nav-toggler
-      color: $mk-color-scheme-dark
+  .sticky-top .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after
+    background-color: $mk-color-scheme-dark !important
 
-    .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after
-      background-color: $mk-color-scheme-dark !important
+  .top-menu .sub-menu
+    background-color: #303030
 
-  .sticky-top.sticky .top-menu
+    & > li
+      border-bottom: 1px solid #909090
 
-    .sub-menu
-      background-color: #303030
+      &:hover
+        background-color: #606060
 
-      & > li
-        border-bottom: 1px solid #909090
+  .mobile-menu .menu-box
+    background: $mk-color-scheme-light
 
-        &:hover
-          background-color: #606060
-
+    .top-menu > li.menu-item-has-children.open
+      background-color: #606060
 
 

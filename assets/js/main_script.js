@@ -1,10 +1,28 @@
 (function($) {
 	"use strict";
 
+	// submenu dropdown toggler
+	if ($('.main-menu li.menu-item-has-children ul').length) {
+		$('.main-menu li.menu-item-has-children').append(
+			'<div class="dropdown-btn"></div>'
+		);
+
+		// disable dropdown parent link
+		$('.main-menu .top-menu li.menu-item-has-children > a').on('click', function(e) {
+			e.preventDefault();
+		});
+	}
+
 	// mobile nav
 	if ($('.mobile-menu').length) {
 		var mobileMenuContent = $('.top-menu').html();
 		$('.mobile-menu .top-menu').append(mobileMenuContent);
+
+		// dropdown button
+		$('.mobile-menu li.menu-item-has-children .dropdown-btn').on('click', function() {
+			$(this).toggleClass('open').prev('ul').slideToggle(500);
+			$(this).closest('li').toggleClass('open');
+		});
 
 		// Menu Toggle Button
 		$('.mobile-nav-toggler').on('click', function() {
