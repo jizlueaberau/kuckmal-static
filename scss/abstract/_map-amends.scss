@@ -1,0 +1,8 @@
+// Create custom map
+$custom-colors: (
+	"mk-primary": $mk-primary,
+	"mk-secondary": $mk-secondary
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);

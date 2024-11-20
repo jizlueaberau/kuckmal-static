@@ -105,6 +105,19 @@ a
   &:hover
     text-decoration: none
 
+h1
+  font-weight: 300
+  font-size: 1.5rem
+  line-height: 2.25rem
+
+  strong
+    font-weight: 700
+
+@media (min-width: 992px)
+  h1
+    font-size: 2.5rem
+    line-height: 3.5rem
+
 // Sticky Header
 
 #logo
@@ -409,6 +422,30 @@ a
   .mobile-menu-visible
     overflow: auto
 
+// Intro Section
+
+#intro
+  position: relative
+  min-height: 100vh
+  background: rgb(237,237,237)
+  background: linear-gradient(0deg, rgba(237,237,237,1) 0%, rgba(237,237,237,1) 64%, rgba(255,255,255,1) 100%)
+  
+  .box
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    min-height: 80vh
+    padding: 0
+
+@media (min-width: 576px)
+  #intro .box
+    padding: 0 2rem 
+
+@media (min-width: 992px)
+  #intro .box
+    padding: 0
+
 @media (prefers-color-scheme: dark)
   body
     color: $mk-body-color-dark
@@ -439,5 +476,10 @@ a
 
     .top-menu > li.menu-item-has-children.open
       background-color: #606060
+
+  #intro
+    background: $mk-body-bg-color-dark
+
+
 
 

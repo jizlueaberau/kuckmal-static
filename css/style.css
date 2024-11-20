@@ -48,6 +48,21 @@ a:hover {
   text-decoration: none;
 }
 
+h1 {
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+}
+h1 strong {
+  font-weight: 700;
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+  }
+}
 #logo {
   position: absolute;
   display: inline;
@@ -441,6 +456,31 @@ a:hover {
     overflow: auto;
   }
 }
+#intro {
+  position: relative;
+  min-height: 100vh;
+  background: rgb(237, 237, 237);
+  background: linear-gradient(0deg, rgb(237, 237, 237) 0%, rgb(237, 237, 237) 64%, rgb(255, 255, 255) 100%);
+}
+#intro .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 0;
+}
+
+@media (min-width: 576px) {
+  #intro .box {
+    padding: 0 2rem;
+  }
+}
+@media (min-width: 992px) {
+  #intro .box {
+    padding: 0;
+  }
+}
 @media (prefers-color-scheme: dark) {
   body {
     color: #f9f9f9;
@@ -469,6 +509,9 @@ a:hover {
   }
   .mobile-menu .menu-box .top-menu > li.menu-item-has-children.open {
     background-color: #606060;
+  }
+  #intro {
+    background: #0d0d0d;
   }
 }
 
