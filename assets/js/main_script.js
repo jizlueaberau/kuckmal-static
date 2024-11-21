@@ -29,6 +29,12 @@
 			$(this).toggleClass('is-active');
 			$('body').toggleClass('mobile-menu-visible');
 		});
+
+		// Closing Mobile Menu on Inpage Anchors
+		$('.mobile-menu li a').on('click', function() {
+			$('.mobile-nav-togger').toggleClass('is-active');
+			$('body').toggleClass('mobile-menu-visible');
+		});
 	}
 
 	// sticky navigation scroll listener
@@ -48,7 +54,7 @@
 		}
 		lastScrollTop = st <= 0 ? 0 : st;
 	});
-	
+
 	// animation css waypoints script
 	function onScrollInit(items, trigger) {
 		items.each(function() {
