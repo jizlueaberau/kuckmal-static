@@ -4,5 +4,10 @@ $custom-colors: (
 	"mk-secondary": $mk-secondary
 );
 
+$custom-ratios: (
+	"3x4": calc(4 / 3 * 100%)
+);
+
 // Merge the maps
 $theme-colors: map-merge($theme-colors, $custom-colors);
+$aspect-ratios: map-merge($aspect-ratios, $custom-ratios);

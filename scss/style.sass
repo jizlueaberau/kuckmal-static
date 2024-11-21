@@ -21,7 +21,6 @@ $mk-review-source-border-color-dark: #f9f9f9
 $mk-review-rating-color-light: #f7b00e
 $mk-review-rating-color-dark: #fff
 
-
 // Google Fonts
 
 @font-face
@@ -53,7 +52,7 @@ $mk-review-rating-color-dark: #fff
   list-style: none
 
 @mixin box-shadow
-  box-shadow: 0px 3px 10px 4px rgba(0,0,0,0.15)
+  box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.1)
 
 @mixin fontello($font-size, $line-height, $margin: 0 .4em )
   font-family: "fontello"
@@ -78,10 +77,20 @@ $mk-review-rating-color-dark: #fff
 :root
   --font-family: system-ui, -apple-system, "Average Sans", sans-serif
   --font-size: 20px
+  --color-bg-brown-hover: rgba(200,200,200,0.5)
+  --underline-offset-y: 1px
+  --underline-intrinsic-size: 6
+  --cap-image-left: url('data:image/svg+xml,<svg width="15" height="30" viewBox="0 0 15 30" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_97_2699)"><mask id="mask0_97_2699" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="30"><rect width="15" height="30" fill="%23D9D9D9"/></mask><g mask="url(%23mask0_97_2699)"><circle cx="15" cy="15" r="15" fill="%23C8C8C8" fill-opacity="0.5"/></g></g><defs><clipPath id="clip0_97_2699"><rect width="15" height="30" fill="white"/></clipPath></defs></svg>')
+  --cap-image-right: url('data:image/svg+xml,<svg width="15" height="30" viewBox="0 0 15 30" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_97_2707)"><mask id="mask0_97_2707" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="30"><rect width="15" height="30" fill="%23D9D9D9"/></mask><g mask="url(%23mask0_97_2707)"><circle cy="15" r="15" fill="%23C8C8C8" fill-opacity="0.5"/></g></g><defs><clipPath id="clip0_97_2707"><rect width="15" height="30" fill="white"/></clipPath></defs></svg>')
+  --underline-color: var(--color-bg-brown-hover)
+  --underline-size: 12
+  --underline-cap-width: 3px
+  --underline-width-scale: calc(var(--underline-size) / var(--underline-intrinsic-size))
 
 body
   font-family: var(--font-family)
   font-size: var(--font-size)
+  font-weight: 300
   color: $mk-body-color
   background-color: $mk-body-bg-color
 
@@ -97,7 +106,7 @@ p
 h1,h2,h3,h4,h5,h6
   font-family: "Open Sans", sans-serif
   font-optical-sizing: auto
-  font-weight: 700
+  font-weight: 300
   font-style: normal
   font-variation-settings: "wdth" 100
 
@@ -430,7 +439,23 @@ h1,h2,h3,h4,h5,h6
     line-height: 1.5em
 
     strong
+      box-decoration-break: clone
+      -webkit-box-decoration-break: clone
+      background-repeat: no-repeat
+      background-position-x: -5000%,-100%,-500%
+      background-position-y: calc(100% - var(--underline-offset-y) * -1)
+      background-size: calc(100% - calc(2 * var(--underline-intrinsic-size) * 1px)) calc(var(--underline-size) * 1px), auto calc(var(--underline-size) * 1px),auto calc(var(--underline-size) * 1px)
+      background-image: linear-gradient(180deg, var(--color-bg-brown-hover), var(--color-bg-brown-hover)), var(--cap-image-left), var(--cap-image-right)
+      padding: 0
+      color: inherit
+      text-decoration: none
       font-weight: 700
+      -webkit-animation: 1.5s highlight .1s 1 normal forwards
+      animation: 1.5s highlight .1s 1 normal forwards
+
+@keyframes highlight
+    to
+      background-position-x: calc(var(--underline-cap-width) * var(--underline-width-scale)),0,100%
 
 @media (min-width: 992px)
   #intro
@@ -454,8 +479,10 @@ h1,h2,h3,h4,h5,h6
   display: flex
   flex-direction: column
   justify-content: center
-  padding: 1rem 0 1rem
-  margin-bottom: 3rem
+  padding: 3rem
+  margin: 0 auto
+  max-width: 568px
+  padding-bottom: 6rem
 
   .review-rating
     display: flex
@@ -505,6 +532,94 @@ h1,h2,h3,h4,h5,h6
       height: 1.75rem
       margin-right: .5em
 
+// Projects
+
+.project-wall
+  padding-bottom: 4em
+  
+  .col-left, col-right
+    padding: 3em 0
+    position: relative
+
+  img
+    max-width: 100%
+    @include transition(500ms)
+    overflow: hidden
+    border-radius: .5em
+    @include box-shadow
+
+  .image:hover img
+    transform: scale(1.05)
+
+  .description
+    padding: 2em .5em 0
+
+    span
+      display: inline-block
+
+    h2
+      font-size: 1em
+      font-weight: 400
+      padding: 0
+      margin: 0
+
+    .skills
+      font-size: 0.75em
+      font-weight: 300
+
+      strong
+        font-weight: 700
+
+@media (min-width: 992px)
+  .project-wall
+    padding-bottom: 8em
+
+    .col-left, .col-right
+      padding-top: 6em
+
+    .col-left
+      padding-right: 3em
+
+    .col-right
+      padding-left: 3em
+
+    .indent-top
+      margin-top: -5em
+
+// About
+
+#about
+  position: relative
+
+  .svg-mask
+    position: relative
+    padding: .2em
+
+    svg
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: auto
+
+    svg rect
+      mask-mode: match-source
+      mask: url(#mask)
+
+    img
+
+  .about-me
+    padding: 2em 0
+
+    h2
+      margin-bottom: 2em
+
+    .btn-mk-secondary
+      margin-top: 2em
+
+#mask-rect
+  fill: #ededed
+
 // Swiper
 
 .swiper
@@ -516,6 +631,26 @@ h1,h2,h3,h4,h5,h6
 
     &.swiper-pagination-bullet-active
       background-color: $mk-swiper-pagination-active-color-light
+
+// Footer
+
+footer
+  position: relative
+  background: rgb(255,255,255)
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 64%, rgba(237,237,237,1) 100%)
+
+  .inner-footer
+    padding: 6em 0
+
+    strong
+      font-weight: 700
+
+  .copy
+    padding: .5em 0
+    background-color: #fff
+    font-size: .8em
+
+// Dark Scheme
 
 @media (prefers-color-scheme: dark)
   body
@@ -558,6 +693,15 @@ h1,h2,h3,h4,h5,h6
 
       &.swiper-pagination-bullet-active
         background-color: $mk-swiper-pagination-active-color-dark
+  
+  #mask-rect
+    fill: #0d0d0d
+
+  footer
+    background: $mk-body-bg-color-dark
+
+    .copy
+      background: $mk-body-bg-color-dark
 
 
 

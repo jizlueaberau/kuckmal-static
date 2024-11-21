@@ -8,11 +8,21 @@
 :root {
   --font-family: system-ui, -apple-system, "Average Sans", sans-serif;
   --font-size: 20px;
+  --color-bg-brown-hover: rgba(200,200,200,0.5);
+  --underline-offset-y: 1px;
+  --underline-intrinsic-size: 6;
+  --cap-image-left: url('data:image/svg+xml,<svg width="15" height="30" viewBox="0 0 15 30" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_97_2699)"><mask id="mask0_97_2699" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="30"><rect width="15" height="30" fill="%23D9D9D9"/></mask><g mask="url(%23mask0_97_2699)"><circle cx="15" cy="15" r="15" fill="%23C8C8C8" fill-opacity="0.5"/></g></g><defs><clipPath id="clip0_97_2699"><rect width="15" height="30" fill="white"/></clipPath></defs></svg>');
+  --cap-image-right: url('data:image/svg+xml,<svg width="15" height="30" viewBox="0 0 15 30" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_97_2707)"><mask id="mask0_97_2707" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="15" height="30"><rect width="15" height="30" fill="%23D9D9D9"/></mask><g mask="url(%23mask0_97_2707)"><circle cy="15" r="15" fill="%23C8C8C8" fill-opacity="0.5"/></g></g><defs><clipPath id="clip0_97_2707"><rect width="15" height="30" fill="white"/></clipPath></defs></svg>');
+  --underline-color: var(--color-bg-brown-hover);
+  --underline-size: 12;
+  --underline-cap-width: 3px;
+  --underline-width-scale: calc(var(--underline-size) / var(--underline-intrinsic-size));
 }
 
 body {
   font-family: var(--font-family);
   font-size: var(--font-size);
+  font-weight: 300;
   color: #3d3d3d;
   background-color: #ededed;
 }
@@ -28,7 +38,7 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 300;
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
@@ -172,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   list-style: none;
-  box-shadow: 0px 3px 10px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
 }
 .top-menu .sub-menu > li {
   padding: 0.75rem 0;
@@ -447,9 +457,26 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.5em;
 }
 #intro h1 strong {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background-repeat: no-repeat;
+  background-position-x: -5000%, -100%, -500%;
+  background-position-y: calc(100% - var(--underline-offset-y) * -1);
+  background-size: calc(100% - 2 * var(--underline-intrinsic-size) * 1px) calc(var(--underline-size) * 1px), auto calc(var(--underline-size) * 1px), auto calc(var(--underline-size) * 1px);
+  background-image: linear-gradient(180deg, var(--color-bg-brown-hover), var(--color-bg-brown-hover)), var(--cap-image-left), var(--cap-image-right);
+  padding: 0;
+  color: inherit;
+  text-decoration: none;
   font-weight: 700;
+  -webkit-animation: 1.5s highlight 0.1s 1 normal forwards;
+  animation: 1.5s highlight 0.1s 1 normal forwards;
 }
 
+@keyframes highlight {
+  to {
+    background-position-x: calc(var(--underline-cap-width) * var(--underline-width-scale)), 0, 100%;
+  }
+}
 @media (min-width: 992px) {
   #intro .box {
     padding: 0;
@@ -469,8 +496,10 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 0 1rem;
-  margin-bottom: 3rem;
+  padding: 3rem;
+  margin: 0 auto;
+  max-width: 568px;
+  padding-bottom: 6rem;
 }
 .review-element .review-rating {
   display: flex;
@@ -536,6 +565,96 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 0.5em;
 }
 
+.project-wall {
+  padding-bottom: 4em;
+}
+.project-wall .col-left, .project-wall col-right {
+  padding: 3em 0;
+  position: relative;
+}
+.project-wall img {
+  max-width: 100%;
+  transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -webkit-transition: 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+  overflow: hidden;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
+}
+.project-wall .image:hover img {
+  transform: scale(1.05);
+}
+.project-wall .description {
+  padding: 2em 0.5em 0;
+}
+.project-wall .description span {
+  display: inline-block;
+}
+.project-wall .description h2 {
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+}
+.project-wall .description .skills {
+  font-size: 0.75em;
+  font-weight: 300;
+}
+.project-wall .description .skills strong {
+  font-weight: 700;
+}
+
+@media (min-width: 992px) {
+  .project-wall {
+    padding-bottom: 8em;
+  }
+  .project-wall .col-left, .project-wall .col-right {
+    padding-top: 6em;
+  }
+  .project-wall .col-left {
+    padding-right: 3em;
+  }
+  .project-wall .col-right {
+    padding-left: 3em;
+  }
+  .project-wall .indent-top {
+    margin-top: -5em;
+  }
+}
+#about {
+  position: relative;
+}
+#about .svg-mask {
+  position: relative;
+  padding: 0.2em;
+}
+#about .svg-mask svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+#about .svg-mask svg rect {
+  mask-mode: match-source;
+  mask: url(#mask);
+}
+#about .about-me {
+  padding: 2em 0;
+}
+#about .about-me h2 {
+  margin-bottom: 2em;
+}
+#about .about-me .btn-mk-secondary {
+  margin-top: 2em;
+}
+
+#mask-rect {
+  fill: #ededed;
+}
+
 .swiper {
   width: 100%;
   height: auto;
@@ -545,6 +664,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 .swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: #3d3d3d;
+}
+
+footer {
+  position: relative;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 64%, rgb(237, 237, 237) 100%);
+}
+footer .inner-footer {
+  padding: 6em 0;
+}
+footer .inner-footer strong {
+  font-weight: 700;
+}
+footer .copy {
+  padding: 0.5em 0;
+  background-color: #fff;
+  font-size: 0.8em;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -584,6 +720,15 @@ h1, h2, h3, h4, h5, h6 {
   }
   .swiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background-color: #fff;
+  }
+  #mask-rect {
+    fill: #0d0d0d;
+  }
+  footer {
+    background: #0d0d0d;
+  }
+  footer .copy {
+    background: #0d0d0d;
   }
 }
 
