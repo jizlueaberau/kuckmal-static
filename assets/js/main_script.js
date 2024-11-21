@@ -49,6 +49,36 @@
 		lastScrollTop = st <= 0 ? 0 : st;
 	});
 
+	// make all animations fadeinup on mobile
+	if ($(window).width() < 992) {
+		$('div').attr('data-animation','animate__fadeInUp');
+	}
+
+	// animation css waypoints script
+	function onScrollInit(items, trigger) {
+		items.each(function() {
+			var osElement = $(this),
+			    osAnimationClass = osElement.attr('data-animation'),
+			    osAnimationDelay = osElement.attr('data-delay');
+
+			osElement.css({
+				'-webkit-animation-delay': osAnimationDelay,
+				'-moz-animation-delay': osAnimationDelay,
+				'animation-delay': osAnimationDelay
+			});
+
+			var osTrigger = (trigger) ? trigger : osElement;
+
+			osTrigger.waypoint(function() {
+				osElement.addClass('animate__animated').addClass(osAnimationClass);
+			}, {
+				triggerOnce: true,
+				offset: '100%'
+			});
+		});
+	}
+	onScrollInit($('.os-animation'));
+
 	// Initialize Swiper
 	const swiper = new Swiper('.swiper', {
 		direction: 'horizontal',
