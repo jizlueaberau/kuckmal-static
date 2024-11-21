@@ -83,6 +83,15 @@ a
   &:hover
     text-decoration: none
 
+p
+
+h1,h2,h3,h4,h5,h6
+  font-family: "Open Sans", sans-serif
+  font-optical-sizing: auto
+  font-weight: 700
+  font-style: normal
+  font-variation-settings: "wdth" 100
+
 // Sticky Header
 
 #logo
@@ -229,6 +238,10 @@ a
   content: '\f34e'
 .icon-down-open-mini
   content: '\e800'
+
+@media (max-width:320px)
+  .social
+    display: none
 
 // Hamburger
 
@@ -385,7 +398,6 @@ a
 #intro
   position: relative
   min-height: 100vh
-
   background: rgb(237,237,237)
   background: linear-gradient(0deg, rgba(237,237,237,1) 0%, rgba(237,237,237,1) 64%, rgba(255,255,255,1) 100%)
   
@@ -394,19 +406,14 @@ a
     flex-direction: column
     justify-content: center
     align-items: center
-    height: 80vh
+    height: 85vh
     min-height: 770px
     padding: 0
 
   h1
     font-weight: 300
-    font-size: 1.5em
-    line-height: 2.25rem
-    font-family: "Open Sans", sans-serif
-    font-optical-sizing: auto
-    font-weight: 300
-    font-style: normal
-    font-variation-settings: "wdth" 100
+    font-size: 1.2em
+    line-height: 1.5em
 
     strong
       font-weight: 700

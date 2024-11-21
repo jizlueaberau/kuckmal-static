@@ -25,6 +25,14 @@ a:hover {
   text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
 #logo {
   position: absolute;
   display: inline;
@@ -228,6 +236,11 @@ a:hover {
   content: "\e800";
 }
 
+@media (max-width: 320px) {
+  .social {
+    display: none;
+  }
+}
 .mobile-nav-toggler {
   display: inline-block;
   visibility: visible;
@@ -419,19 +432,14 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 85vh;
   min-height: 770px;
   padding: 0;
 }
 #intro h1 {
   font-weight: 300;
-  font-size: 1.5em;
-  line-height: 2.25rem;
-  font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
+  font-size: 1.2em;
+  line-height: 1.5em;
 }
 #intro h1 strong {
   font-weight: 700;
