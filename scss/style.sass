@@ -12,13 +12,22 @@ $mk-color-scheme-light: #000
 $mk-color-scheme-dark: #fff
 $mk-sticky-top-bg-color-light: #fff
 $mk-sticky-top-bg-color-dark: #0d0d0d
+$mk-swiper-pagination-active-color-light: #3d3d3d
+$mk-swiper-pagination-active-color-dark: #fff
+$mk-swiper-pagination-color-light: #b0b0b0
+$mk-swiper-pagination-color-dark: #f9f9f9
+$mk-review-source-border-color-light: #cdcdcd
+$mk-review-source-border-color-dark: #f9f9f9
+$mk-review-rating-color-light: #f7b00e
+$mk-review-rating-color-dark: #fff
+
 
 // Google Fonts
 
 @font-face
   font-family: 'fontello'
-  src: url('../assets/fonts/fontello.eot?34166676')
-  src: url('../assets/fonts/fontello.eot?34166676#iefix') format('embedded-opentype'), url('../assets/fonts/fontello.woff2?34166676') format('woff2'), url('../assets/fonts/fontello.woff?34166676') format('woff'), url('../assets/fonts/fontello.ttf?34166676') format('truetype'), url('../assets/fonts/fontello.svg?34166676#fontello') format('svg')
+  src: url('../assets/fontello/fontello.eot?34166676')
+  src: url('../assets/fontello/fontello.eot?34166676#iefix') format('embedded-opentype'), url('../assets/fontello/fontello.woff2?34166676') format('woff2'), url('../assets/fontello/fontello.woff?34166676') format('woff'), url('../assets/fontello/fontello.ttf?34166676') format('truetype'), url('../assets/fontello/fontello.svg?34166676#fontello') format('svg')
   font-weight: normal
   font-style: normal
 
@@ -410,6 +419,11 @@ h1,h2,h3,h4,h5,h6
     min-height: 770px
     padding: 0
 
+  .cta
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+
   h1
     font-weight: 300
     font-size: 1.2em
@@ -424,9 +438,84 @@ h1,h2,h3,h4,h5,h6
     .box
       padding: 0
 
+    .cta
+      justify-content: flex-start
+
+      .btn
+        margin-right: 1rem
+
     h1
       font-size: 1.6666667em
       line-height: 1.5em
+
+// Google Review
+
+.review-element
+  display: flex
+  flex-direction: column
+  justify-content: center
+  padding: 1rem 0 1rem
+  margin-bottom: 3rem
+
+  .review-rating
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: center
+
+    .review-icon::before
+      @include fontello(1.2em, 2em, .2em)
+      color: $mk-review-rating-color-light
+      display: block
+
+    .review-icon.icon-full::before
+      content: '\e801'
+
+    .review-icon.icon-half::before
+      content: '\f123'
+
+    .review-icon.icon-empty::before
+      content: '\e802'
+
+  blockquote
+    text-align: center
+    padding: .5em 0
+    font-size: 1em
+
+  .review-source
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    justify-content: center
+    align-items: center
+    font-size: 0.75em
+    border: 1px solid $mk-review-source-border-color-light
+    border-radius: .5rem
+    margin: 0 auto
+    padding: .8em 0
+
+    .review-author, .review-platform
+      padding: 0 .8em
+
+    .author-image
+      height: 2rem
+      margin-right: .5em
+
+    .platform-icon
+      height: 1.75rem
+      margin-right: .5em
+
+// Swiper
+
+.swiper
+  width: 100%
+  height: auto
+
+  .swiper-pagination .swiper-pagination-bullet
+    background-color: $mk-swiper-pagination-color-light
+
+    &.swiper-pagination-bullet-active
+      background-color: $mk-swiper-pagination-active-color-light
 
 @media (prefers-color-scheme: dark)
   body
@@ -461,6 +550,14 @@ h1,h2,h3,h4,h5,h6
 
   #intro
     background: $mk-body-bg-color-dark
+
+  .swiper
+
+    .swiper-pagination .swiper-pagination-bullet
+      background-color: $mk-swiper-pagination-color-dark
+
+      &.swiper-pagination-bullet-active
+        background-color: $mk-swiper-pagination-active-color-dark
 
 
 

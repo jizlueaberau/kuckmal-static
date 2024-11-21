@@ -49,4 +49,20 @@
 		lastScrollTop = st <= 0 ? 0 : st;
 	});
 
+	// Initialize Swiper
+	const swiper = new Swiper('.swiper', {
+		direction: 'horizontal',
+		loop: true,
+		slidesPerView: 1,
+		spaceBetween: 100,
+		breakpoints: {
+			576: {
+				slidesPerView: 2
+			}
+		},
+		pagination: {
+			el: '.swiper-pagination'
+		}
+	});
+
 })(jQuery);
