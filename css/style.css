@@ -477,10 +477,9 @@ h1 strong, h2 strong {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 75vh;
-  min-height: 400px;
+  height: 70vh;
+  min-height: 300px;
   margin-top: 72px;
-  background-color: green;
 }
 #intro .cta {
   display: flex;
