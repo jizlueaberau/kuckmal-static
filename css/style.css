@@ -480,6 +480,7 @@ h1 strong, h2 strong {
   height: 75vh;
   min-height: 400px;
   margin-top: 72px;
+  background-color: green;
 }
 #intro .cta {
   display: flex;
