@@ -477,9 +477,9 @@ h1 strong, h2 strong {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
-  min-height: 500px;
-  padding: 0;
+  height: 75vh;
+  min-height: 400px;
+  margin-top: 72px;
 }
 #intro .cta {
   display: flex;
@@ -500,6 +500,7 @@ h1 strong, h2 strong {
 }
 @media (min-width: 992px) {
   #intro .box {
+    margin: 0 !important;
     padding: 0;
   }
   #intro .cta {
